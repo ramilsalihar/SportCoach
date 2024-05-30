@@ -10,9 +10,23 @@ class AppTextTheme extends TextTheme {
     required this.colors,
     required this.dimens,
   }) : super(
-        // displayLarge: TextStyle(
-        //   fontSize: dimens.textDisplayLarge,
-        //   color: colors.black,
-        // ),
+          displayLarge: TextStyle(
+            fontSize: dimens.textDisplayLarge,
+            color: colors.white,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'SF Pro',
+          ),
+          displayMedium: TextStyle(
+            fontSize: dimens.textDisplayMedium,
+            color: colors.white,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'SF Pro',
+          ),
+          displaySmall: TextStyle(
+            fontSize: dimens.textDisplaySmall,
+            color: colors.white,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'SF Pro',
+          ),
         );
 }

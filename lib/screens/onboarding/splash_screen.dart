@@ -1,9 +1,10 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:sport_coach/screens/onboarding/intro_screens.dart';
 
 //TODO: Customize for Native Splash Screen
+@RoutePage()
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -31,12 +32,8 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.forward();
 
-    Timer(const Duration(seconds: 3), () {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const IntroScreens(),
-        ),
-      );
+    Timer(const Duration(seconds: 2), () {
+      context.router.replaceNamed('/intro');
     });
   }
 

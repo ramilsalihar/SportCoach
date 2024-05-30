@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_coach/screens/onboarding/splash_screen.dart';
+import 'package:sport_coach/navigation/app_router.dart';
 import 'package:sport_coach/theme/app_theme.dart';
 
 void main() {
@@ -11,9 +11,10 @@ class SportCoach extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final appRouter = AppRouter();
+    return MaterialApp.router(
       theme: AppTheme.lightTheme,
-      home: const SplashScreen(),
+      routerConfig: appRouter.config(),
     );
   }
 }

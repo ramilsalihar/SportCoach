@@ -1,8 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_coach/models/intro_screen_model.dart';
-import 'package:sport_coach/screens/home/home_screen.dart';
 import 'package:sport_coach/widgets/buttons/app_text_button.dart';
 
+@RoutePage()
 class IntroScreens extends StatefulWidget {
   const IntroScreens({super.key});
 
@@ -63,11 +64,7 @@ class _IntroScreensState extends State<IntroScreens> {
               title: 'Next',
               onPressed: () {
                 _isLastPage
-                    ? Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const HomeScreen(),
-                        ),
-                      )
+                    ? context.router.replaceNamed('/home')
                     : _controller.nextPage(
                         duration: const Duration(milliseconds: 500),
                         curve: Curves.easeIn,

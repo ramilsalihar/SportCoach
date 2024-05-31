@@ -7,34 +7,28 @@ class AppTextButton extends StatelessWidget {
     required this.onPressed,
   });
 
-  final String title;
+  final Widget title;
   final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final theme = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.only(
-        top: 40.0,
-        bottom: 40.0,
+        top: 10.0,
+        bottom: 10.0,
       ),
       child: Container(
-        height: 65,
-        width: width * 0.9,
+        height: 40,
+        width: double.infinity,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(12),
           color: Theme.of(context).colorScheme.secondary,
         ),
         child: TextButton(
           onPressed: onPressed,
-          child: Text(
-            title,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'SF Pro',
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          child: title,
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:sport_coach/screens/home/athletes/athletes_content.dart';
 import 'package:sport_coach/widgets/layout/app_bottom_bar.dart';
 
 @RoutePage()
@@ -38,9 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
             });
           },
           children: const [
-            Center(
-              child: Text('Medication'),
-            ),
+            AthletesContent(),
             Center(
               child: Text('Medication'),
             ),

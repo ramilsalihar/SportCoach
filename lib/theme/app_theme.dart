@@ -31,5 +31,11 @@ class AppTheme {
       backgroundColor: _lightColors.black,
       unselectedItemColor: Colors.grey,
     ),
+    cardTheme: CardTheme(
+      color: _lightColors.cardColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(dimens.cardRadius),
+      ),
+    ),
   );
 }

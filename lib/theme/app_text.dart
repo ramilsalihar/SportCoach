@@ -28,5 +28,21 @@ class AppTextTheme extends TextTheme {
             fontWeight: FontWeight.bold,
             fontFamily: 'SF Pro',
           ),
+          headlineLarge: TextStyle(
+            fontSize: dimens.textHeadlineLarge,
+            color: colors.white,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'SF Pro',
+          ),
+          headlineMedium: TextStyle(
+            fontSize: dimens.textHeadlineMedium,
+            color: colors.white,
+            fontFamily: 'SF Pro',
+          ),
+          headlineSmall: TextStyle(
+            fontSize: dimens.textHeadlineSmall,
+            color: colors.white,
+            fontFamily: 'SF Pro',
+          ),
         );
 }

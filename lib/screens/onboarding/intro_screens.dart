@@ -61,7 +61,10 @@ class _IntroScreensState extends State<IntroScreens> {
           Align(
             alignment: Alignment.bottomCenter,
             child: AppTextButton(
-              title: 'Next',
+              title: Text(
+                'Next',
+                style: theme.textTheme.displaySmall,
+              ),
               onPressed: () {
                 _isLastPage
                     ? context.router.replaceNamed('/home')

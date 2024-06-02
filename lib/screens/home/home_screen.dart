@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sport_coach/screens/home/athletes/athletes_content.dart';
 import 'package:sport_coach/screens/home/calendar/calendar_content.dart';
 import 'package:sport_coach/screens/home/rating/rating_content.dart';
+import 'package:sport_coach/screens/home/settings/settings_content.dart';
 import 'package:sport_coach/screens/home/training/training_content.dart';
 import 'package:sport_coach/widgets/layout/app_bottom_bar.dart';
 
@@ -15,10 +16,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int selectedIndex = 3;
+  int selectedIndex = 4;
 
   final PageController _pageController = PageController(
-    initialPage: 3,
+    initialPage: 4,
   );
 
   @override
@@ -48,9 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
             TrainingContent(),
             CalendarContent(),
             RatingContent(),
-            Center(
-              child: Text('Medication'),
-            ),
+            SettingsContent()
           ],
         ),
         bottomNavigationBar: AppBottomBar(
@@ -63,34 +62,36 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
         ),
-        floatingActionButton: SizedBox(
-          height: 35,
-          width: 35,
-          child: IconButton(
-            icon: Image.asset('assets/icons/add.png'),
-            onPressed: () {
-              // if (selectedIndex == 0) {
-              //   Navigator.of(context).push(
-              //     MaterialPageRoute(
-              //       builder: (context) => const NewArticlePage(),
-              //     ),
-              //   );
-              // } else if (selectedIndex == 1) {
-              //   Navigator.of(context).push(
-              //     MaterialPageRoute(
-              //       builder: (context) => const NewEventPage(),
-              //     ),
-              //   );
-              // } else if (selectedIndex == 2) {
-              //   Navigator.of(context).push(
-              //     MaterialPageRoute(
-              //       builder: (context) => const AddBudgetPage(),
-              //     ),
-              //   );
-              // }
-            },
-          ),
-        ),
+        floatingActionButton: selectedIndex != 4
+            ? SizedBox(
+                height: 35,
+                width: 35,
+                child: IconButton(
+                  icon: Image.asset('assets/icons/add.png'),
+                  onPressed: () {
+                    // if (selectedIndex == 0) {
+                    //   Navigator.of(context).push(
+                    //     MaterialPageRoute(
+                    //       builder: (context) => const NewArticlePage(),
+                    //     ),
+                    //   );
+                    // } else if (selectedIndex == 1) {
+                    //   Navigator.of(context).push(
+                    //     MaterialPageRoute(
+                    //       builder: (context) => const NewEventPage(),
+                    //     ),
+                    //   );
+                    // } else if (selectedIndex == 2) {
+                    //   Navigator.of(context).push(
+                    //     MaterialPageRoute(
+                    //       builder: (context) => const AddBudgetPage(),
+                    //     ),
+                    //   );
+                    // }
+                  },
+                ),
+              )
+            : null,
         floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
       ),
     );

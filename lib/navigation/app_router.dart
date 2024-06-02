@@ -25,12 +25,22 @@ class AppRouter extends $AppRouter {
         AutoRoute(
           page: AthleteRoute.page,
           path: '/athlete',
-          initial: true,
+          // initial: true,
         ),
         AutoRoute(
           page: AthleteEditRoute.page,
           path: '/athlete-edit',
           // initial: true,
-        )
+        ),
+        AutoRoute(
+          page: TrainingRoute.page,
+          path: '/training',
+          // initial: true,
+        ),
+        AutoRoute(
+          page: NewTrainingProgram.page,
+          path: '/new-training-program',
+          initial: true,
+        ),
       ];
 }

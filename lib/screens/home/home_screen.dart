@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_coach/screens/home/athletes/athletes_content.dart';
+import 'package:sport_coach/screens/home/training/training_content.dart';
 import 'package:sport_coach/widgets/layout/app_bottom_bar.dart';
 
 @RoutePage()
@@ -12,9 +13,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int selectedIndex = 0;
+  int selectedIndex = 1;
 
-  final PageController _pageController = PageController();
+  final PageController _pageController = PageController(
+    initialPage: 1,
+  );
 
   @override
   void dispose() {
@@ -40,9 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           children: const [
             AthletesContent(),
-            Center(
-              child: Text('Medication'),
-            ),
+            TrainingContent(),
             Center(
               child: Text('Medication'),
             ),

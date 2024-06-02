@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_coach/screens/home/athletes/athletes_content.dart';
 import 'package:sport_coach/screens/home/calendar/calendar_content.dart';
+import 'package:sport_coach/screens/home/rating/rating_content.dart';
 import 'package:sport_coach/screens/home/training/training_content.dart';
 import 'package:sport_coach/widgets/layout/app_bottom_bar.dart';
 
@@ -14,10 +15,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int selectedIndex = 2;
+  int selectedIndex = 3;
 
   final PageController _pageController = PageController(
-    initialPage: 2,
+    initialPage: 3,
   );
 
   @override
@@ -46,9 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
             AthletesContent(),
             TrainingContent(),
             CalendarContent(),
-            Center(
-              child: Text('Medication'),
-            ),
+            RatingContent(),
             Center(
               child: Text('Medication'),
             ),

@@ -11,7 +11,7 @@ class AppRouter extends $AppRouter {
         AutoRoute(
           page: HomeRoute.page,
           path: '/home',
-          initial: true,
+          // initial: true,
         ),
         AutoRoute(
           page: SplashRoute.page,
@@ -51,6 +51,16 @@ class AppRouter extends $AppRouter {
           page: EventEdit.page,
           path: '/event-edit',
           // initial: true,
-        )
+        ),
+        AutoRoute(
+          page: NewRating.page,
+          path: '/new-rating',
+          // initial: true,
+        ),
+        AutoRoute(
+          page: AthleteRating.page,
+          path: '/athlete-rating',
+          initial: true,
+        ),
       ];
 }

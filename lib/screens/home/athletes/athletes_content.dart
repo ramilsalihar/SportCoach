@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sport_coach/providers/athlete_notifier.dart';
 import 'package:sport_coach/widgets/cards/app_card.dart';
 import 'package:sport_coach/widgets/cards/statistics_card.dart';
 import 'package:sport_coach/widgets/layout/empty_body.dart';
@@ -9,7 +11,7 @@ class AthletesContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const isEmpty = false;
+    final isEmpty = Provider.of<AthleteNotifier>(context).isEmpty;
     return Padding(
       padding: const EdgeInsets.only(
         top: 30,
@@ -25,7 +27,10 @@ class AthletesContent extends StatelessWidget {
               ? EmptyBody(
                   title: 'Players',
                   message: 'Your athletes will be\nrepresented here',
-                  onPressed: () {},
+                  buttonText: 'Click to add new players',
+                  onPressed: () {
+                    // context.router.pushNamed('/athlete');
+                  },
                 )
               : _buildArticleList(context),
         ],

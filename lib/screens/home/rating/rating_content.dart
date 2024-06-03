@@ -23,6 +23,7 @@ class RatingContent extends StatelessWidget {
               ? EmptyBody(
                   title: 'Rating athletes',
                   message: 'Here you can leave \nratings for athletes',
+                  buttonText: 'Click to add new Rating',
                   onPressed: () {},
                 )
               : _buildArticleList(context),

@@ -26,6 +26,7 @@ class TrainingContent extends StatelessWidget {
                     title: 'Training Programs',
                     message:
                         'Here will be your training \nprograms for sportsman',
+                    buttonText: 'Click to add new Training',
                     onPressed: () {},
                   )
                 : _buildArticleList(context),

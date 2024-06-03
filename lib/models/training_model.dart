@@ -1,21 +1,21 @@
-class TrainingModel {
-  final String imagePath;
-  final String name;
-  final int repetition;
-  final int approaches;
-  final String exName;
-  final int exRepetitions;
-  final int exApproaches;
-  final int exWeight;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  TrainingModel(
-    this.imagePath,
-    this.name,
-    this.repetition,
-    this.approaches,
-    this.exName,
-    this.exRepetitions,
-    this.exApproaches,
-    this.exWeight,
-  );
+part 'training_model.freezed.dart';
+part 'training_model.g.dart';
+
+@freezed
+class TrainingModel with _$TrainingModel {
+  const factory TrainingModel({
+    required String imagePath,
+    required String name,
+    required int repetition,
+    required int approaches,
+    required String exName,
+    required int exRepetitions,
+    required int exApproaches,
+    required int exWeight,
+  }) = _TrainingModel;
+
+  factory TrainingModel.fromJson(Map<String, dynamic> json) =>
+      _$TrainingModelFromJson(json);
 }

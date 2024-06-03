@@ -6,11 +6,13 @@ class EmptyBody extends StatelessWidget {
     super.key,
     required this.title,
     required this.message,
+    required this.buttonText,
     required this.onPressed,
   });
 
   final String title;
   final String message;
+  final String buttonText;
   final VoidCallback onPressed;
 
   @override
@@ -49,7 +51,7 @@ class EmptyBody extends StatelessWidget {
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        'Click to add new players',
+                        buttonText,
                         style: theme.displaySmall,
                       ),
                     ],

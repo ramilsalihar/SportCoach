@@ -1,19 +1,20 @@
-class AthleteModel {
-  final String imagePath;
-  final String name;
-  final int age;
-  final String weight;
-  final String height;
-  final int classes;
-  final int duration;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  AthleteModel(
-    this.imagePath,
-    this.name,
-    this.age,
-    this.weight,
-    this.height,
-    this.classes,
-    this.duration,
-  );
+part 'athlete_model.freezed.dart';
+part 'athlete_model.g.dart';
+
+@freezed
+class AthleteModel with _$AthleteModel {
+  const factory AthleteModel({
+    required String imagePath,
+    required String name,
+    required int age,
+    required String weight,
+    required String height,
+    required int classes,
+    required int duration,
+  }) = _AthleteModel;
+
+  factory AthleteModel.fromJson(Map<String, dynamic> json) =>
+      _$AthleteModelFromJson(json);
 }

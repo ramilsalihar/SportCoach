@@ -66,6 +66,7 @@ class CalendarContent extends StatelessWidget {
               ? EmptyBody(
                   title: 'Calendar of Events',
                   message: 'Events for athletes will \nbe recorded there',
+                  buttonText: 'Click to add new Events',
                   onPressed: () {},
                 )
               : _buildArticleList(context),

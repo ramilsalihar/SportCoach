@@ -12,4 +12,6 @@ class AppColors {
   Color get black => const Color(0xff000000);
 
   Color get cardColor => const Color(0xff23242B);
+
+  Color get intro => const Color(0xff083564);
 }

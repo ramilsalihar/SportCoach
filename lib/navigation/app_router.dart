@@ -2,20 +2,16 @@ import 'package:auto_route/auto_route.dart';
 
 import 'app_router.gr.dart';
 
-@AutoRouterConfig()
+@AutoRouterConfig(replaceInRouteName: 'Page,Route')
 class AppRouter extends $AppRouter {
   AppRouter();
 
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
-          page: HomeRoute.page,
-          path: '/home',
-          initial: true,
-        ),
-        AutoRoute(
           page: SplashRoute.page,
           path: '/splash',
+          initial: true,
         ),
         AutoRoute(
           page: IntroRoutes.page,
@@ -23,44 +19,49 @@ class AppRouter extends $AppRouter {
           // initial: true,
         ),
         AutoRoute(
-          page: AthleteRoute.page,
-          path: '/athlete',
+          page: HomeRoute.page,
+          path: '/home',
           // initial: true,
         ),
         AutoRoute(
-          page: AthleteEditRoute.page,
-          path: '/athlete-edit',
-          // initial: true,
+          page: AthleteRoute.page,
+          path: '/athlete',
+          children: [
+            AutoRoute(
+              page: AthleteEditRoute.page,
+              path: 'athlete-edit',
+            ),
+          ],
         ),
         AutoRoute(
           page: TrainingRoute.page,
           path: '/training',
-          // initial: true,
-        ),
-        AutoRoute(
-          page: NewTrainingProgram.page,
-          path: '/new-training-program',
-          // initial: true,
+          children: [
+            AutoRoute(
+              page: NewTrainingProgram.page,
+              path: 'new-training-program',
+            ),
+          ],
         ),
         AutoRoute(
           page: EventRoute.page,
           path: '/event',
-          // initial: true,
-        ),
-        AutoRoute(
-          page: EventEdit.page,
-          path: '/event-edit',
-          // initial: true,
+          children: [
+            AutoRoute(
+              page: EventEdit.page,
+              path: 'event-edit',
+            ),
+          ],
         ),
         AutoRoute(
           page: NewRating.page,
           path: '/new-rating',
-          // initial: true,
-        ),
-        AutoRoute(
-          page: AthleteRating.page,
-          path: '/athlete-rating',
-          // initial: true,
+          children: [
+            AutoRoute(
+              page: AthleteRating.page,
+              path: 'athlete-rating',
+            ),
+          ],
         ),
       ];
 }

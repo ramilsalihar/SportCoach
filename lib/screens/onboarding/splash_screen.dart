@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:sport_coach/navigation/app_router.gr.dart';
+import 'package:sport_coach/services/first_launch_service.dart';
+import 'package:sport_coach/widgets/utils/app_loader.dart';
 
 //TODO: Customize for Native Splash Screen
 @RoutePage()
@@ -15,7 +18,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation<double> _animation;
+  final FirstLaunchService _firstLaunchService = FirstLaunchService();
 
   @override
   void initState() {
@@ -25,16 +28,26 @@ class _SplashScreenState extends State<SplashScreen>
       vsync: this,
     );
 
-    _animation = Tween<double>(begin: 0, end: 1).animate(_controller)
-      ..addListener(() {
-        setState(() {});
-      });
-
     _controller.forward();
 
     Timer(const Duration(seconds: 2), () {
-      context.router.replaceNamed('/intro');
+      navigate();
     });
+  }
+
+  Future<void> navigate() async {
+    final isFirstLaunch = await _firstLaunchService.isFirstLaunch();
+
+    if (isFirstLaunch) {
+      await _firstLaunchService.setFirstLaunch();
+      context.router.replaceAll(
+        [const IntroRoutes()],
+      );
+    } else {
+      context.router.replaceAll(
+        [const HomeRoute()],
+      );
+    }
   }
 
   @override
@@ -46,43 +59,25 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: Stack(
         children: [
           Align(
             alignment: Alignment.center,
             child: SizedBox(
-              height: 190,
-              width: 190,
-              child: Image.asset('assets/logo/logo.png'),
+              height: 150,
+              child: Image.asset(
+                'assets/logo/logo.png',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.only(bottom: 100),
-              child: SizedBox(
-                width: 190,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                      backgroundColor: Colors.grey,
-                      strokeWidth: 6.0,
-                      value: 1,
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      '%',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
+              child: AppLoader(
+                controller: _controller,
               ),
             ),
           ),

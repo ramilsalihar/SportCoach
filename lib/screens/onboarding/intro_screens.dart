@@ -18,7 +18,7 @@ class _IntroScreensState extends State<IntroScreens> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: theme.primaryColor,
       body: Stack(
@@ -30,7 +30,6 @@ class _IntroScreensState extends State<IntroScreens> {
                 _isLastPage = (index == 2);
               });
             },
-            // physics: const NeverScrollableScrollPhysics(),
             children: [
               _buildBody(context, introScreenData[0]),
               _buildBody(context, introScreenData[1]),
@@ -58,21 +57,26 @@ class _IntroScreensState extends State<IntroScreens> {
           //     ),
           //   ),
           // ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: AppTextButton(
-              title: Text(
-                'Next',
-                style: theme.textTheme.displaySmall,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 35),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: AppTextButton(
+                height: 60,
+                width: width * 0.9,
+                title: Text(
+                  _isLastPage ? 'Enable Notifications' : 'Next',
+                  style: theme.textTheme.displaySmall,
+                ),
+                onPressed: () {
+                  _isLastPage
+                      ? context.router.replaceNamed('/home')
+                      : _controller.nextPage(
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeIn,
+                        );
+                },
               ),
-              onPressed: () {
-                _isLastPage
-                    ? context.router.replaceNamed('/home')
-                    : _controller.nextPage(
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeIn,
-                      );
-              },
             ),
           ),
         ],

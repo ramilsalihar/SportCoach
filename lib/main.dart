@@ -34,6 +34,8 @@ class SportCoach extends StatelessWidget {
     return MaterialApp.router(
       theme: AppTheme.lightTheme,
       routerConfig: appRouter.config(),
+      // routerDelegate: appRouter.delegate(),
+      // routeInformationParser: appRouter.defaultRouteParser(),
     );
   }
 }

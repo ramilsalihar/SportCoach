@@ -14,7 +14,7 @@ class AppTheme {
     primaryColor: _lightColors.primaryColor,
     cardColor: _lightColors.cardColor,
     colorScheme: ColorScheme.light(
-      primary: _lightColors.primaryColor,
+      primary: _lightColors.intro,
       secondary: _lightColors.secondaryColor,
     ),
     // fontFamily: GoogleFonts.openSans(

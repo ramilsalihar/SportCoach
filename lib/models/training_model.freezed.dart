@@ -20,14 +20,15 @@ TrainingModel _$TrainingModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TrainingModel {
+  int get index => throw _privateConstructorUsedError;
   String get imagePath => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  int get repetition => throw _privateConstructorUsedError;
-  int get approaches => throw _privateConstructorUsedError;
+  String get repetition => throw _privateConstructorUsedError;
+  String get approaches => throw _privateConstructorUsedError;
   String get exName => throw _privateConstructorUsedError;
-  int get exRepetitions => throw _privateConstructorUsedError;
-  int get exApproaches => throw _privateConstructorUsedError;
-  int get exWeight => throw _privateConstructorUsedError;
+  String get exRepetitions => throw _privateConstructorUsedError;
+  String get exApproaches => throw _privateConstructorUsedError;
+  String get exWeight => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,14 +43,15 @@ abstract class $TrainingModelCopyWith<$Res> {
       _$TrainingModelCopyWithImpl<$Res, TrainingModel>;
   @useResult
   $Res call(
-      {String imagePath,
+      {int index,
+      String imagePath,
       String name,
-      int repetition,
-      int approaches,
+      String repetition,
+      String approaches,
       String exName,
-      int exRepetitions,
-      int exApproaches,
-      int exWeight});
+      String exRepetitions,
+      String exApproaches,
+      String exWeight});
 }
 
 /// @nodoc
@@ -65,6 +67,7 @@ class _$TrainingModelCopyWithImpl<$Res, $Val extends TrainingModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? index = null,
     Object? imagePath = null,
     Object? name = null,
     Object? repetition = null,
@@ -75,6 +78,10 @@ class _$TrainingModelCopyWithImpl<$Res, $Val extends TrainingModel>
     Object? exWeight = null,
   }) {
     return _then(_value.copyWith(
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
       imagePath: null == imagePath
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
@@ -86,11 +93,11 @@ class _$TrainingModelCopyWithImpl<$Res, $Val extends TrainingModel>
       repetition: null == repetition
           ? _value.repetition
           : repetition // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       approaches: null == approaches
           ? _value.approaches
           : approaches // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       exName: null == exName
           ? _value.exName
           : exName // ignore: cast_nullable_to_non_nullable
@@ -98,15 +105,15 @@ class _$TrainingModelCopyWithImpl<$Res, $Val extends TrainingModel>
       exRepetitions: null == exRepetitions
           ? _value.exRepetitions
           : exRepetitions // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       exApproaches: null == exApproaches
           ? _value.exApproaches
           : exApproaches // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       exWeight: null == exWeight
           ? _value.exWeight
           : exWeight // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
     ) as $Val);
   }
 }
@@ -120,14 +127,15 @@ abstract class _$$TrainingModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String imagePath,
+      {int index,
+      String imagePath,
       String name,
-      int repetition,
-      int approaches,
+      String repetition,
+      String approaches,
       String exName,
-      int exRepetitions,
-      int exApproaches,
-      int exWeight});
+      String exRepetitions,
+      String exApproaches,
+      String exWeight});
 }
 
 /// @nodoc
@@ -141,6 +149,7 @@ class __$$TrainingModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? index = null,
     Object? imagePath = null,
     Object? name = null,
     Object? repetition = null,
@@ -151,6 +160,10 @@ class __$$TrainingModelImplCopyWithImpl<$Res>
     Object? exWeight = null,
   }) {
     return _then(_$TrainingModelImpl(
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
       imagePath: null == imagePath
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
@@ -162,11 +175,11 @@ class __$$TrainingModelImplCopyWithImpl<$Res>
       repetition: null == repetition
           ? _value.repetition
           : repetition // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       approaches: null == approaches
           ? _value.approaches
           : approaches // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       exName: null == exName
           ? _value.exName
           : exName // ignore: cast_nullable_to_non_nullable
@@ -174,15 +187,15 @@ class __$$TrainingModelImplCopyWithImpl<$Res>
       exRepetitions: null == exRepetitions
           ? _value.exRepetitions
           : exRepetitions // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       exApproaches: null == exApproaches
           ? _value.exApproaches
           : exApproaches // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       exWeight: null == exWeight
           ? _value.exWeight
           : exWeight // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
     ));
   }
 }
@@ -191,7 +204,8 @@ class __$$TrainingModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TrainingModelImpl implements _TrainingModel {
   const _$TrainingModelImpl(
-      {required this.imagePath,
+      {required this.index,
+      required this.imagePath,
       required this.name,
       required this.repetition,
       required this.approaches,
@@ -204,25 +218,27 @@ class _$TrainingModelImpl implements _TrainingModel {
       _$$TrainingModelImplFromJson(json);
 
   @override
+  final int index;
+  @override
   final String imagePath;
   @override
   final String name;
   @override
-  final int repetition;
+  final String repetition;
   @override
-  final int approaches;
+  final String approaches;
   @override
   final String exName;
   @override
-  final int exRepetitions;
+  final String exRepetitions;
   @override
-  final int exApproaches;
+  final String exApproaches;
   @override
-  final int exWeight;
+  final String exWeight;
 
   @override
   String toString() {
-    return 'TrainingModel(imagePath: $imagePath, name: $name, repetition: $repetition, approaches: $approaches, exName: $exName, exRepetitions: $exRepetitions, exApproaches: $exApproaches, exWeight: $exWeight)';
+    return 'TrainingModel(index: $index, imagePath: $imagePath, name: $name, repetition: $repetition, approaches: $approaches, exName: $exName, exRepetitions: $exRepetitions, exApproaches: $exApproaches, exWeight: $exWeight)';
   }
 
   @override
@@ -230,6 +246,7 @@ class _$TrainingModelImpl implements _TrainingModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TrainingModelImpl &&
+            (identical(other.index, index) || other.index == index) &&
             (identical(other.imagePath, imagePath) ||
                 other.imagePath == imagePath) &&
             (identical(other.name, name) || other.name == name) &&
@@ -248,8 +265,8 @@ class _$TrainingModelImpl implements _TrainingModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, imagePath, name, repetition,
-      approaches, exName, exRepetitions, exApproaches, exWeight);
+  int get hashCode => Object.hash(runtimeType, index, imagePath, name,
+      repetition, approaches, exName, exRepetitions, exApproaches, exWeight);
 
   @JsonKey(ignore: true)
   @override
@@ -267,34 +284,37 @@ class _$TrainingModelImpl implements _TrainingModel {
 
 abstract class _TrainingModel implements TrainingModel {
   const factory _TrainingModel(
-      {required final String imagePath,
+      {required final int index,
+      required final String imagePath,
       required final String name,
-      required final int repetition,
-      required final int approaches,
+      required final String repetition,
+      required final String approaches,
       required final String exName,
-      required final int exRepetitions,
-      required final int exApproaches,
-      required final int exWeight}) = _$TrainingModelImpl;
+      required final String exRepetitions,
+      required final String exApproaches,
+      required final String exWeight}) = _$TrainingModelImpl;
 
   factory _TrainingModel.fromJson(Map<String, dynamic> json) =
       _$TrainingModelImpl.fromJson;
 
   @override
+  int get index;
+  @override
   String get imagePath;
   @override
   String get name;
   @override
-  int get repetition;
+  String get repetition;
   @override
-  int get approaches;
+  String get approaches;
   @override
   String get exName;
   @override
-  int get exRepetitions;
+  String get exRepetitions;
   @override
-  int get exApproaches;
+  String get exApproaches;
   @override
-  int get exWeight;
+  String get exWeight;
   @override
   @JsonKey(ignore: true)
   _$$TrainingModelImplCopyWith<_$TrainingModelImpl> get copyWith =>

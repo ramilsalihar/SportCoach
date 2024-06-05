@@ -36,13 +36,6 @@ class AthleteService {
     };
   }
 
-  Future<void> saveAthlete(AthleteModel athlete) async {
-    final prefs = await SharedPreferences.getInstance();
-    List<String>? athletesJson = prefs.getStringList(_athletesKey) ?? [];
-    athletesJson.add(json.encode(athlete.toJson()));
-    await prefs.setStringList(_athletesKey, athletesJson);
-  }
-
   Future<void> editAthlete(int index, AthleteModel updatedAthlete) async {
     final prefs = await SharedPreferences.getInstance();
     List<String>? athletesJson = prefs.getStringList(_athletesKey) ?? [];
@@ -82,6 +75,9 @@ class AthleteService {
   }
 
   Future<void> addAthlete(AthleteModel athlete) async {
-    await saveAthlete(athlete);
+    final prefs = await SharedPreferences.getInstance();
+    List<String>? athletesJson = prefs.getStringList(_athletesKey) ?? [];
+    athletesJson.add(json.encode(athlete.toJson()));
+    await prefs.setStringList(_athletesKey, athletesJson);
   }
 }

@@ -20,8 +20,9 @@ EventModel _$EventModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$EventModel {
+  int get index => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  DateTime get dateTime => throw _privateConstructorUsedError;
+  String get dateTime => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get athlete => throw _privateConstructorUsedError;
@@ -39,8 +40,9 @@ abstract class $EventModelCopyWith<$Res> {
       _$EventModelCopyWithImpl<$Res, EventModel>;
   @useResult
   $Res call(
-      {String name,
-      DateTime dateTime,
+      {int index,
+      String name,
+      String dateTime,
       String location,
       String description,
       String athlete});
@@ -59,6 +61,7 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? index = null,
     Object? name = null,
     Object? dateTime = null,
     Object? location = null,
@@ -66,6 +69,10 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
     Object? athlete = null,
   }) {
     return _then(_value.copyWith(
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -73,7 +80,7 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
       dateTime: null == dateTime
           ? _value.dateTime
           : dateTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       location: null == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
@@ -99,8 +106,9 @@ abstract class _$$EventModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name,
-      DateTime dateTime,
+      {int index,
+      String name,
+      String dateTime,
       String location,
       String description,
       String athlete});
@@ -117,6 +125,7 @@ class __$$EventModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? index = null,
     Object? name = null,
     Object? dateTime = null,
     Object? location = null,
@@ -124,6 +133,10 @@ class __$$EventModelImplCopyWithImpl<$Res>
     Object? athlete = null,
   }) {
     return _then(_$EventModelImpl(
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -131,7 +144,7 @@ class __$$EventModelImplCopyWithImpl<$Res>
       dateTime: null == dateTime
           ? _value.dateTime
           : dateTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       location: null == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
@@ -152,7 +165,8 @@ class __$$EventModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$EventModelImpl implements _EventModel {
   const _$EventModelImpl(
-      {required this.name,
+      {required this.index,
+      required this.name,
       required this.dateTime,
       required this.location,
       required this.description,
@@ -162,9 +176,11 @@ class _$EventModelImpl implements _EventModel {
       _$$EventModelImplFromJson(json);
 
   @override
+  final int index;
+  @override
   final String name;
   @override
-  final DateTime dateTime;
+  final String dateTime;
   @override
   final String location;
   @override
@@ -174,7 +190,7 @@ class _$EventModelImpl implements _EventModel {
 
   @override
   String toString() {
-    return 'EventModel(name: $name, dateTime: $dateTime, location: $location, description: $description, athlete: $athlete)';
+    return 'EventModel(index: $index, name: $name, dateTime: $dateTime, location: $location, description: $description, athlete: $athlete)';
   }
 
   @override
@@ -182,6 +198,7 @@ class _$EventModelImpl implements _EventModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EventModelImpl &&
+            (identical(other.index, index) || other.index == index) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.dateTime, dateTime) ||
                 other.dateTime == dateTime) &&
@@ -194,8 +211,8 @@ class _$EventModelImpl implements _EventModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, dateTime, location, description, athlete);
+  int get hashCode => Object.hash(
+      runtimeType, index, name, dateTime, location, description, athlete);
 
   @JsonKey(ignore: true)
   @override
@@ -213,8 +230,9 @@ class _$EventModelImpl implements _EventModel {
 
 abstract class _EventModel implements EventModel {
   const factory _EventModel(
-      {required final String name,
-      required final DateTime dateTime,
+      {required final int index,
+      required final String name,
+      required final String dateTime,
       required final String location,
       required final String description,
       required final String athlete}) = _$EventModelImpl;
@@ -223,9 +241,11 @@ abstract class _EventModel implements EventModel {
       _$EventModelImpl.fromJson;
 
   @override
+  int get index;
+  @override
   String get name;
   @override
-  DateTime get dateTime;
+  String get dateTime;
   @override
   String get location;
   @override

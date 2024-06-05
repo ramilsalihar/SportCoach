@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme.of(context).primaryColor,
       body: Stack(
         children: [
           Align(
@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen>
             child: SizedBox(
               height: 150,
               child: Image.asset(
-                'assets/logo/logo.png',
+                'assets/logo/logo_review.png',
                 fit: BoxFit.cover,
               ),
             ),

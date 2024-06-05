@@ -30,12 +30,15 @@ abstract class $AppRouter extends _i12.RootStackRouter {
   @override
   final Map<String, _i12.PageFactory> pagesMap = {
     AthleteEditRoute.name: (routeData) {
-      final args = routeData.argsAs<AthleteEditRouteArgs>();
+      final args = routeData.argsAs<AthleteEditRouteArgs>(
+          orElse: () => const AthleteEditRouteArgs());
       return _i12.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i1.AthleteEditScreen(
           key: args.key,
           title: args.title,
+          index: args.index,
+          isEdit: args.isEdit,
         ),
       );
     },
@@ -46,9 +49,13 @@ abstract class $AppRouter extends _i12.RootStackRouter {
       );
     },
     AthleteRoute.name: (routeData) {
+      final args = routeData.argsAs<AthleteRouteArgs>();
       return _i12.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.AthleteScreen(),
+        child: _i3.AthleteScreen(
+          key: args.key,
+          index: args.index,
+        ),
       );
     },
     EventEdit.name: (routeData) {
@@ -111,13 +118,17 @@ abstract class $AppRouter extends _i12.RootStackRouter {
 class AthleteEditRoute extends _i12.PageRouteInfo<AthleteEditRouteArgs> {
   AthleteEditRoute({
     _i13.Key? key,
-    required String title,
+    String? title,
+    int? index,
+    bool isEdit = false,
     List<_i12.PageRouteInfo>? children,
   }) : super(
           AthleteEditRoute.name,
           args: AthleteEditRouteArgs(
             key: key,
             title: title,
+            index: index,
+            isEdit: isEdit,
           ),
           initialChildren: children,
         );
@@ -131,16 +142,22 @@ class AthleteEditRoute extends _i12.PageRouteInfo<AthleteEditRouteArgs> {
 class AthleteEditRouteArgs {
   const AthleteEditRouteArgs({
     this.key,
-    required this.title,
+    this.title,
+    this.index,
+    this.isEdit = false,
   });
 
   final _i13.Key? key;
 
-  final String title;
+  final String? title;
+
+  final int? index;
+
+  final bool isEdit;
 
   @override
   String toString() {
-    return 'AthleteEditRouteArgs{key: $key, title: $title}';
+    return 'AthleteEditRouteArgs{key: $key, title: $title, index: $index, isEdit: $isEdit}';
   }
 }
 
@@ -160,16 +177,40 @@ class AthleteRating extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.AthleteScreen]
-class AthleteRoute extends _i12.PageRouteInfo<void> {
-  const AthleteRoute({List<_i12.PageRouteInfo>? children})
-      : super(
+class AthleteRoute extends _i12.PageRouteInfo<AthleteRouteArgs> {
+  AthleteRoute({
+    _i13.Key? key,
+    required int index,
+    List<_i12.PageRouteInfo>? children,
+  }) : super(
           AthleteRoute.name,
+          args: AthleteRouteArgs(
+            key: key,
+            index: index,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'AthleteRoute';
 
-  static const _i12.PageInfo<void> page = _i12.PageInfo<void>(name);
+  static const _i12.PageInfo<AthleteRouteArgs> page =
+      _i12.PageInfo<AthleteRouteArgs>(name);
+}
+
+class AthleteRouteArgs {
+  const AthleteRouteArgs({
+    this.key,
+    required this.index,
+  });
+
+  final _i13.Key? key;
+
+  final int index;
+
+  @override
+  String toString() {
+    return 'AthleteRouteArgs{key: $key, index: $index}';
+  }
 }
 
 /// generated route for

@@ -20,13 +20,14 @@ AthleteModel _$AthleteModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AthleteModel {
+  int get index => throw _privateConstructorUsedError;
   String get imagePath => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  int get age => throw _privateConstructorUsedError;
+  String get age => throw _privateConstructorUsedError;
   String get weight => throw _privateConstructorUsedError;
   String get height => throw _privateConstructorUsedError;
-  int get classes => throw _privateConstructorUsedError;
-  int get duration => throw _privateConstructorUsedError;
+  String get classes => throw _privateConstructorUsedError;
+  String get duration => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,13 +42,14 @@ abstract class $AthleteModelCopyWith<$Res> {
       _$AthleteModelCopyWithImpl<$Res, AthleteModel>;
   @useResult
   $Res call(
-      {String imagePath,
+      {int index,
+      String imagePath,
       String name,
-      int age,
+      String age,
       String weight,
       String height,
-      int classes,
-      int duration});
+      String classes,
+      String duration});
 }
 
 /// @nodoc
@@ -63,6 +65,7 @@ class _$AthleteModelCopyWithImpl<$Res, $Val extends AthleteModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? index = null,
     Object? imagePath = null,
     Object? name = null,
     Object? age = null,
@@ -72,6 +75,10 @@ class _$AthleteModelCopyWithImpl<$Res, $Val extends AthleteModel>
     Object? duration = null,
   }) {
     return _then(_value.copyWith(
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
       imagePath: null == imagePath
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
@@ -83,7 +90,7 @@ class _$AthleteModelCopyWithImpl<$Res, $Val extends AthleteModel>
       age: null == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       weight: null == weight
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
@@ -95,11 +102,11 @@ class _$AthleteModelCopyWithImpl<$Res, $Val extends AthleteModel>
       classes: null == classes
           ? _value.classes
           : classes // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       duration: null == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
     ) as $Val);
   }
 }
@@ -113,13 +120,14 @@ abstract class _$$AthleteModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String imagePath,
+      {int index,
+      String imagePath,
       String name,
-      int age,
+      String age,
       String weight,
       String height,
-      int classes,
-      int duration});
+      String classes,
+      String duration});
 }
 
 /// @nodoc
@@ -133,6 +141,7 @@ class __$$AthleteModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? index = null,
     Object? imagePath = null,
     Object? name = null,
     Object? age = null,
@@ -142,6 +151,10 @@ class __$$AthleteModelImplCopyWithImpl<$Res>
     Object? duration = null,
   }) {
     return _then(_$AthleteModelImpl(
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
       imagePath: null == imagePath
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
@@ -153,7 +166,7 @@ class __$$AthleteModelImplCopyWithImpl<$Res>
       age: null == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       weight: null == weight
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
@@ -165,11 +178,11 @@ class __$$AthleteModelImplCopyWithImpl<$Res>
       classes: null == classes
           ? _value.classes
           : classes // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       duration: null == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
     ));
   }
 }
@@ -178,7 +191,8 @@ class __$$AthleteModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AthleteModelImpl implements _AthleteModel {
   const _$AthleteModelImpl(
-      {required this.imagePath,
+      {required this.index,
+      required this.imagePath,
       required this.name,
       required this.age,
       required this.weight,
@@ -190,23 +204,25 @@ class _$AthleteModelImpl implements _AthleteModel {
       _$$AthleteModelImplFromJson(json);
 
   @override
+  final int index;
+  @override
   final String imagePath;
   @override
   final String name;
   @override
-  final int age;
+  final String age;
   @override
   final String weight;
   @override
   final String height;
   @override
-  final int classes;
+  final String classes;
   @override
-  final int duration;
+  final String duration;
 
   @override
   String toString() {
-    return 'AthleteModel(imagePath: $imagePath, name: $name, age: $age, weight: $weight, height: $height, classes: $classes, duration: $duration)';
+    return 'AthleteModel(index: $index, imagePath: $imagePath, name: $name, age: $age, weight: $weight, height: $height, classes: $classes, duration: $duration)';
   }
 
   @override
@@ -214,6 +230,7 @@ class _$AthleteModelImpl implements _AthleteModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AthleteModelImpl &&
+            (identical(other.index, index) || other.index == index) &&
             (identical(other.imagePath, imagePath) ||
                 other.imagePath == imagePath) &&
             (identical(other.name, name) || other.name == name) &&
@@ -227,8 +244,8 @@ class _$AthleteModelImpl implements _AthleteModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, imagePath, name, age, weight, height, classes, duration);
+  int get hashCode => Object.hash(runtimeType, index, imagePath, name, age,
+      weight, height, classes, duration);
 
   @JsonKey(ignore: true)
   @override
@@ -246,31 +263,34 @@ class _$AthleteModelImpl implements _AthleteModel {
 
 abstract class _AthleteModel implements AthleteModel {
   const factory _AthleteModel(
-      {required final String imagePath,
+      {required final int index,
+      required final String imagePath,
       required final String name,
-      required final int age,
+      required final String age,
       required final String weight,
       required final String height,
-      required final int classes,
-      required final int duration}) = _$AthleteModelImpl;
+      required final String classes,
+      required final String duration}) = _$AthleteModelImpl;
 
   factory _AthleteModel.fromJson(Map<String, dynamic> json) =
       _$AthleteModelImpl.fromJson;
 
   @override
+  int get index;
+  @override
   String get imagePath;
   @override
   String get name;
   @override
-  int get age;
+  String get age;
   @override
   String get weight;
   @override
   String get height;
   @override
-  int get classes;
+  String get classes;
   @override
-  int get duration;
+  String get duration;
   @override
   @JsonKey(ignore: true)
   _$$AthleteModelImplCopyWith<_$AthleteModelImpl> get copyWith =>

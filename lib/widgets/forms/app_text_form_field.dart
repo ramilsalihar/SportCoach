@@ -7,6 +7,7 @@ class AppTextFormField extends StatefulWidget {
     required this.title,
     required this.controller,
     this.keyboardType,
+    this.validate = true,
     // required this.onChanged,
   });
 
@@ -14,6 +15,7 @@ class AppTextFormField extends StatefulWidget {
   final String title;
   final TextEditingController controller;
   final TextInputType? keyboardType;
+  final bool validate;
 
   // final void Function(String) onChanged;
 
@@ -37,7 +39,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
           style: theme.textTheme.headlineSmall,
           decoration: InputDecoration(
             isDense: true,
-            hintText: widget.hintText ?? '',
+            hintText: widget.hintText.isEmpty ? 'Enter' : widget.hintText,
             hintStyle: theme.textTheme.headlineSmall!.copyWith(
               color: Colors.grey,
             ),
@@ -60,6 +62,12 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
           onChanged: (value) {},
           keyboardType: widget.keyboardType ?? TextInputType.text,
           maxLines: null,
+          //TODO: Add Validator
+          // validator: widget.validate
+          //     ? (value) {
+          //         return '';
+          //       }
+          //     : null,
         ),
       ),
     );

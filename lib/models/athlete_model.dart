@@ -6,14 +6,26 @@ part 'athlete_model.g.dart';
 @freezed
 class AthleteModel with _$AthleteModel {
   const factory AthleteModel({
+    required int index,
     required String imagePath,
     required String name,
-    required int age,
+    required String age,
     required String weight,
     required String height,
-    required int classes,
-    required int duration,
+    required String classes,
+    required String duration,
   }) = _AthleteModel;
+
+  factory AthleteModel.empty() => const AthleteModel(
+        index: 0,
+        imagePath: '',
+        name: '',
+        age: '',
+        weight: '',
+        height: '',
+        classes: '',
+        duration: '',
+      );
 
   factory AthleteModel.fromJson(Map<String, dynamic> json) =>
       _$AthleteModelFromJson(json);

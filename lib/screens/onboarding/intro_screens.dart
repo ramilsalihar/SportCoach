@@ -31,9 +31,9 @@ class _IntroScreensState extends State<IntroScreens> {
               });
             },
             children: [
-              _buildBody(context, introScreenData[0]),
-              _buildBody(context, introScreenData[1]),
-              _buildBody(context, introScreenData[2]),
+              _buildBody(context, introScreenDataReview[0]),
+              _buildBody(context, introScreenDataReview[1]),
+              _buildBody(context, introScreenDataReview[2]),
             ],
           ),
           // Positioned.fill(
@@ -65,7 +65,7 @@ class _IntroScreensState extends State<IntroScreens> {
                 height: 60,
                 width: width * 0.9,
                 title: Text(
-                  _isLastPage ? 'Enable Notifications' : 'Next',
+                  'Next',
                   style: theme.textTheme.displaySmall,
                 ),
                 onPressed: () {

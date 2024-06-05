@@ -14,10 +14,10 @@ void main() {
           create: (_) => AthleteNotifier()..loadAthletes(),
         ),
         ChangeNotifierProvider(
-          create: (_) => EventNotifier()..loadEvents(),
+          create: (_) => EventNotifier(),
         ),
         ChangeNotifierProvider(
-          create: (_) => TrainingNotifier()..loadTrainings(),
+          create: (_) => TrainingNotifier(),
         ),
       ],
       child: const SportCoach(),
@@ -34,8 +34,6 @@ class SportCoach extends StatelessWidget {
     return MaterialApp.router(
       theme: AppTheme.lightTheme,
       routerConfig: appRouter.config(),
-      // routerDelegate: appRouter.delegate(),
-      // routeInformationParser: appRouter.defaultRouteParser(),
     );
   }
 }

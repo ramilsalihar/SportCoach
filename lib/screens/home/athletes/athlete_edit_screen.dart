@@ -1,40 +1,115 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
-import 'package:sport_coach/widgets/forms/app_text_form_field.dart';
+import 'package:provider/provider.dart';
+import 'package:sport_coach/models/athlete_model.dart';
+import 'package:sport_coach/providers/athlete_notifier.dart';
+import 'package:sport_coach/screens/home/athletes/athlete_form.dart';
+import 'package:sport_coach/widgets/layout/custom_app_bar.dart';
 
 @RoutePage()
-class AthleteEditScreen extends StatelessWidget {
-  const AthleteEditScreen({super.key, required this.title});
+class AthleteEditScreen extends StatefulWidget {
+  final String? title;
+  final int? index;
+  final bool isEdit;
 
-  final String title;
+  const AthleteEditScreen({
+    super.key,
+    this.title,
+    this.index,
+    this.isEdit = false,
+  });
+
+  @override
+  State<AthleteEditScreen> createState() => _AthleteEditScreenState();
+}
+
+class _AthleteEditScreenState extends State<AthleteEditScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
+  final ageController = TextEditingController();
+  final weightController = TextEditingController();
+  final heightController = TextEditingController();
+  final classesController = TextEditingController();
+  final durationController = TextEditingController();
+  AthleteModel? athlete = AthleteModel.empty();
+
+  @override
+  void initState() {
+    super.initState();
+    final athleteNotifier = context.read<AthleteNotifier>();
+    if (widget.isEdit && widget.index != null) {
+      athlete =
+          athleteNotifier.findByIndex(widget.index!) ?? AthleteModel.empty();
+      if (athlete != null) {
+        nameController.text = athlete!.name;
+        ageController.text = athlete!.age;
+        weightController.text = athlete!.weight;
+        heightController.text = athlete!.height;
+        classesController.text = athlete!.classes;
+        durationController.text = athlete!.duration;
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    ageController.dispose();
+    weightController.dispose();
+    heightController.dispose();
+    classesController.dispose();
+    durationController.dispose();
+    super.dispose();
+  }
+
+  void _saveAthlete() async {
+    if (_formKey.currentState!.validate()) {
+      final index = widget.isEdit ? widget.index : (widget.index! + 1);
+      final athlete = AthleteModel(
+        index: index!,
+        imagePath: '',
+        name: nameController.text,
+        age: ageController.text,
+        weight: weightController.text,
+        height: heightController.text,
+        classes: classesController.text,
+        duration: durationController.text,
+      );
+
+      final athleteNotifier = context.read<AthleteNotifier>();
+
+      if (widget.isEdit) {
+        await athleteNotifier.editAthlete(widget.index!, athlete);
+      } else {
+        await athleteNotifier.addAthlete(athlete);
+        await athleteNotifier.setAthleteIndex(widget.index! + 1);
+      }
+
+      Navigator.of(context).pop();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: theme.primaryColor,
-      appBar: AppBar(
-        toolbarHeight: 80,
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.blue,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        title: Text(title, style: theme.textTheme.displaySmall),
-        centerTitle: true,
+      appBar: CustomAppBar(
+        title:
+            widget.title ?? (athlete == null ? 'New Athlete' : 'Edit Athlete'),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: _formKey.currentState?.validate() ?? false
+                ? _saveAthlete
+                : null,
             child: Text(
               'Save',
               style: theme.textTheme.headlineMedium!.copyWith(
-                color: Colors.blue,
+                color: _formKey.currentState?.validate() ?? false
+                    ? Colors.blue
+                    : Colors.blue.withOpacity(0.5),
               ),
             ),
           ),
@@ -69,59 +144,20 @@ class AthleteEditScreen extends StatelessWidget {
                 ),
               ),
             ),
-            _AthleteForm(),
+            Form(
+              key: _formKey,
+              child: AthleteForm(
+                nameController: nameController,
+                ageController: ageController,
+                weightController: weightController,
+                heightController: heightController,
+                classesController: classesController,
+                durationController: durationController,
+              ),
+            ),
           ],
         ),
       ),
     );
   }
-}
-
-Widget _AthleteForm() {
-  final nameController = TextEditingController();
-  final ageController = TextEditingController();
-  final weightController = TextEditingController();
-  final heightController = TextEditingController();
-  final classesController = TextEditingController();
-  final durationController = TextEditingController();
-  return Column(
-    children: [
-      const SizedBox(height: 10),
-      AppTextFormField(
-        hintText: 'Enter',
-        title: 'Name',
-        controller: nameController,
-      ),
-      const SizedBox(height: 10),
-      AppTextFormField(
-        hintText: 'Enter',
-        title: 'Age',
-        controller: ageController,
-      ),
-      const SizedBox(height: 10),
-      AppTextFormField(
-        hintText: 'Enter',
-        title: 'Weight',
-        controller: weightController,
-      ),
-      const SizedBox(height: 10),
-      AppTextFormField(
-        hintText: 'Enter',
-        title: 'Height',
-        controller: heightController,
-      ),
-      const SizedBox(height: 10),
-      AppTextFormField(
-        hintText: 'Enter',
-        title: 'Classes per month',
-        controller: classesController,
-      ),
-      const SizedBox(height: 10),
-      AppTextFormField(
-        hintText: 'Enter',
-        title: 'Duration',
-        controller: durationController,
-      ),
-    ],
-  );
 }

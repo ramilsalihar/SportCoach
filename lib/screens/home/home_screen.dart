@@ -1,5 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sport_coach/navigation/app_router.gr.dart';
+import 'package:sport_coach/providers/athlete_notifier.dart';
 import 'package:sport_coach/screens/home/athletes/athletes_content.dart';
 import 'package:sport_coach/screens/home/calendar/calendar_content.dart';
 import 'package:sport_coach/screens/home/rating/rating_content.dart';
@@ -32,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -69,13 +73,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: IconButton(
                   icon: Image.asset('assets/icons/add.png'),
                   onPressed: () {
-                    // if (selectedIndex == 0) {
-                    //   Navigator.of(context).push(
-                    //     MaterialPageRoute(
-                    //       builder: (context) => const NewArticlePage(),
-                    //     ),
-                    //   );
-                    // } else if (selectedIndex == 1) {
+                    if (selectedIndex == 0) {
+                      final athlete = context.read<AthleteNotifier>();
+                      context.router.push(
+                        AthleteEditRoute(
+                          title: 'New Athlete',
+                          index: athlete.athleteIndex,
+                        ),
+                      );
+                    }
+                    // else if (selectedIndex == 1) {
                     //   Navigator.of(context).push(
                     //     MaterialPageRoute(
                     //       builder: (context) => const NewEventPage(),

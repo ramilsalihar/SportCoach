@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sport_coach/navigation/app_router.gr.dart';
 import 'package:sport_coach/providers/athlete_notifier.dart';
+import 'package:sport_coach/providers/event_notifier.dart';
 import 'package:sport_coach/providers/training_notifier.dart';
 import 'package:sport_coach/screens/home/athletes/athletes_content.dart';
 import 'package:sport_coach/screens/home/calendar/calendar_content.dart';
@@ -20,10 +21,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int selectedIndex = 1;
+  int selectedIndex = 2;
 
   final PageController _pageController = PageController(
-    initialPage: 1,
+    initialPage: 2,
   );
 
   @override
@@ -92,19 +93,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       );
                     }
-                    // else if (selectedIndex == 1) {
-                    //   Navigator.of(context).push(
-                    //     MaterialPageRoute(
-                    //       builder: (context) => const NewEventPage(),
-                    //     ),
-                    //   );
-                    // } else if (selectedIndex == 2) {
-                    //   Navigator.of(context).push(
-                    //     MaterialPageRoute(
-                    //       builder: (context) => const AddBudgetPage(),
-                    //     ),
-                    //   );
-                    // }
+                    if (selectedIndex == 2) {
+                      final event = context.read<EventNotifier>();
+                      context.router.push(EventEdit(
+                        index: event.eventIndex,
+                        title: 'New Event',
+                      ));
+                    }
+                    if (selectedIndex == 3) {}
                   },
                 ),
               )

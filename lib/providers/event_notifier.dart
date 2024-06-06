@@ -16,6 +16,7 @@ class EventNotifier extends ChangeNotifier {
 
   EventNotifier() {
     _loadEventIndex();
+    loadEvents();
   }
 
   Future<void> _loadEventIndex() async {
@@ -42,15 +43,32 @@ class EventNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addEvent(EventModel event) async {
+  Future<void> addEvent(EventDetail eventDetail) async {
+    final date = DateTime.now().toIso8601String();
+    final event = EventModel(
+      date: date,
+      events: [eventDetail],
+    );
+
     await _eventService.addEvent(event);
     await setEventIndex(_eventIndex + 1);
     await loadEvents();
   }
 
-  Future<void> editEvent(int index, EventModel event) async {
-    await _eventService.editEvent(index, event);
-    await loadEvents();
+  Future<void> editEvent(int index, EventDetail eventDetail) async {
+    final eventIndex = _events.indexWhere((event) =>
+        event.events.any((detail) => detail.index == eventDetail.index));
+
+    if (eventIndex != -1) {
+      final event = _events[eventIndex];
+      final updatedDetails = event.events.map((detail) {
+        return detail.index == eventDetail.index ? eventDetail : detail;
+      }).toList();
+
+      final updatedEvent = event.copyWith(events: updatedDetails);
+      await _eventService.editEvent(index, updatedEvent);
+      await loadEvents();
+    }
   }
 
   Future<void> deleteEvent(int index) async {
@@ -59,9 +77,16 @@ class EventNotifier extends ChangeNotifier {
     await loadEvents();
   }
 
-  EventModel? findByIndex(int index) {
+  EventDetail? findByIndex(int index) {
     try {
-      return _events.firstWhere((event) => event.index == index);
+      for (final event in _events) {
+        for (final detail in event.events) {
+          if (detail.index == index) {
+            return detail;
+          }
+        }
+      }
+      return null;
     } catch (e) {
       return null;
     }

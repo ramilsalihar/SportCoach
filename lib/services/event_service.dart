@@ -40,10 +40,10 @@ class EventService {
       EventModel event = EventModel.fromJson(
         json.decode(eventsJson[i]),
       );
-      if (event.index == index) {
-        eventsJson[i] = json.encode(updatedEvent.toJson());
-        break;
-      }
+      // if (event.index == index) {
+      //   eventsJson[i] = json.encode(updatedEvent.toJson());
+      //   break;
+      // }
     }
     await prefs.setStringList(_eventsKey, eventsJson);
   }
@@ -55,10 +55,10 @@ class EventService {
       EventModel event = EventModel.fromJson(
         json.decode(eventsJson[i]),
       );
-      if (event.index == index) {
-        eventsJson.removeAt(i);
-        break;
-      }
+      // if (event.index == index) {
+      //   eventsJson.removeAt(i);
+      //   break;
+      // }
     }
     await prefs.setStringList(_eventsKey, eventsJson);
   }

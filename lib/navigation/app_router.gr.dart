@@ -59,15 +59,26 @@ abstract class $AppRouter extends _i12.RootStackRouter {
       );
     },
     EventEdit.name: (routeData) {
+      final args =
+          routeData.argsAs<EventEditArgs>(orElse: () => const EventEditArgs());
       return _i12.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.EventEdit(),
+        child: _i4.EventEdit(
+          key: args.key,
+          index: args.index,
+          title: args.title,
+          isEdit: args.isEdit,
+        ),
       );
     },
     EventRoute.name: (routeData) {
+      final args = routeData.argsAs<EventRouteArgs>();
       return _i12.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.EventScreen(),
+        child: _i5.EventScreen(
+          key: args.key,
+          index: args.index,
+        ),
       );
     },
     HomeRoute.name: (routeData) {
@@ -222,30 +233,88 @@ class AthleteRouteArgs {
 
 /// generated route for
 /// [_i4.EventEdit]
-class EventEdit extends _i12.PageRouteInfo<void> {
-  const EventEdit({List<_i12.PageRouteInfo>? children})
-      : super(
+class EventEdit extends _i12.PageRouteInfo<EventEditArgs> {
+  EventEdit({
+    _i13.Key? key,
+    int? index,
+    String? title,
+    bool isEdit = false,
+    List<_i12.PageRouteInfo>? children,
+  }) : super(
           EventEdit.name,
+          args: EventEditArgs(
+            key: key,
+            index: index,
+            title: title,
+            isEdit: isEdit,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'EventEdit';
 
-  static const _i12.PageInfo<void> page = _i12.PageInfo<void>(name);
+  static const _i12.PageInfo<EventEditArgs> page =
+      _i12.PageInfo<EventEditArgs>(name);
+}
+
+class EventEditArgs {
+  const EventEditArgs({
+    this.key,
+    this.index,
+    this.title,
+    this.isEdit = false,
+  });
+
+  final _i13.Key? key;
+
+  final int? index;
+
+  final String? title;
+
+  final bool isEdit;
+
+  @override
+  String toString() {
+    return 'EventEditArgs{key: $key, index: $index, title: $title, isEdit: $isEdit}';
+  }
 }
 
 /// generated route for
 /// [_i5.EventScreen]
-class EventRoute extends _i12.PageRouteInfo<void> {
-  const EventRoute({List<_i12.PageRouteInfo>? children})
-      : super(
+class EventRoute extends _i12.PageRouteInfo<EventRouteArgs> {
+  EventRoute({
+    _i13.Key? key,
+    required int index,
+    List<_i12.PageRouteInfo>? children,
+  }) : super(
           EventRoute.name,
+          args: EventRouteArgs(
+            key: key,
+            index: index,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'EventRoute';
 
-  static const _i12.PageInfo<void> page = _i12.PageInfo<void>(name);
+  static const _i12.PageInfo<EventRouteArgs> page =
+      _i12.PageInfo<EventRouteArgs>(name);
+}
+
+class EventRouteArgs {
+  const EventRouteArgs({
+    this.key,
+    required this.index,
+  });
+
+  final _i13.Key? key;
+
+  final int index;
+
+  @override
+  String toString() {
+    return 'EventRouteArgs{key: $key, index: $index}';
+  }
 }
 
 /// generated route for

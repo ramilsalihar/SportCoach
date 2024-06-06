@@ -1,4 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sport_coach/navigation/app_router.gr.dart';
+import 'package:sport_coach/providers/event_notifier.dart';
 import 'package:sport_coach/widgets/cards/app_card.dart';
 import 'package:sport_coach/widgets/layout/empty_body.dart';
 
@@ -51,26 +55,35 @@ class CalendarContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const isEmpty = false;
     return Padding(
       padding: const EdgeInsets.only(
         top: 30,
         left: 15,
         right: 15,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildHeader(context),
-          isEmpty
-              ? EmptyBody(
-                  title: 'Calendar of Events',
-                  message: 'Events for athletes will \nbe recorded there',
-                  buttonText: 'Click to add new Events',
-                  onPressed: () {},
-                )
-              : _buildArticleList(context),
-        ],
+      child: Consumer<EventNotifier>(
+        builder: (context, eventNotifier, _) {
+          final isEmpty = eventNotifier.isEmpty;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildHeader(context),
+              isEmpty
+                  ? EmptyBody(
+                      title: 'Calendar of Events',
+                      message: 'Events for athletes will \nbe recorded there',
+                      buttonText: 'Click to add new events',
+                      onPressed: () {
+                        final event = context.read<EventNotifier>();
+                        context.router.push(
+                          EventEdit(index: event.eventIndex),
+                        );
+                      },
+                    )
+                  : _buildArticleList(context),
+            ],
+          );
+        },
       ),
     );
   }
@@ -89,59 +102,71 @@ class CalendarContent extends StatelessWidget {
   Widget _buildArticleList(BuildContext context) {
     final theme = Theme.of(context).textTheme;
     return Expanded(
-      child: ListView.builder(
-        itemCount: events.length,
-        itemBuilder: (context, index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-                child: Text(
-                  events[index]['date'],
-                  style: theme.displayMedium,
-                ),
-              ),
-              ...events[index]['events'].map<Widget>((event) {
-                return Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                  child: AppCard(
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Consumer<EventNotifier>(
+        builder: (context, eventNotifier, _) {
+          final events = eventNotifier.events;
+          return ListView.builder(
+            itemCount: events.length,
+            itemBuilder: (context, index) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 16,
+                    ),
+                    child: Text(
+                      events[index].date,
+                      style: theme.displayMedium,
+                    ),
+                  ),
+                  ...events[index].events.map<Widget>((event) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 4,
+                      ),
+                      child: AppCard(
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                event['title'],
-                                style: theme.displaySmall,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    event.name,
+                                    style: theme.displaySmall,
+                                  ),
+                                  Text(
+                                    event.time,
+                                    style: theme.headlineSmall,
+                                  ),
+                                ],
                               ),
+                              const Divider(
+                                color: Colors.blue,
+                                thickness: 1,
+                              ),
+                              const SizedBox(height: 8),
                               Text(
-                                event['time'],
-                                style: theme.headlineSmall,
+                                event.description,
+                                style: theme.headlineSmall!.copyWith(
+                                  color: Colors.grey.withOpacity(0.7),
+                                ),
                               ),
                             ],
                           ),
-                          const Divider(
-                            color: Colors.blue,
-                            thickness: 1,
-                          ),
-                          const SizedBox(height: 8),
-                          Text(event['description'],
-                              style: theme.headlineSmall!.copyWith(
-                                color: Colors.grey.withOpacity(0.7),
-                              )),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                );
-              }).toList(),
-            ],
+                    );
+                  }),
+                ],
+              );
+            },
           );
         },
       ),

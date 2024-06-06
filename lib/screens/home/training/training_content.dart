@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sport_coach/navigation/app_router.gr.dart';
+import 'package:sport_coach/providers/training_notifier.dart';
 import 'package:sport_coach/widgets/cards/app_card.dart';
 import 'package:sport_coach/widgets/layout/empty_body.dart';
 
@@ -9,29 +11,39 @@ class TrainingContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const isEmpty = false;
     return Padding(
       padding: const EdgeInsets.only(
         top: 30,
         left: 15,
         right: 15,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildHeader(context),
-          Expanded(
-            child: isEmpty
-                ? EmptyBody(
-                    title: 'Training Programs',
-                    message:
-                        'Here will be your training \nprograms for sportsman',
-                    buttonText: 'Click to add new Training',
-                    onPressed: () {},
-                  )
-                : _buildArticleList(context),
-          )
-        ],
+      child: Consumer<TrainingNotifier>(
+        builder: (context, trainingNotifier, _) {
+          final isEmpty = trainingNotifier.isEmpty;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildHeader(context),
+              isEmpty
+                  ? EmptyBody(
+                      title: 'Training Programs',
+                      message:
+                          'Here will be your training \nprograms for sportsman',
+                      buttonText: 'Click to add new Training',
+                      onPressed: () {
+                        final training = context.read<TrainingNotifier>();
+                        context.router.push(
+                          NewTrainingProgram(
+                            title: 'New Training Program',
+                            index: training.trainingIndex,
+                          ),
+                        );
+                      },
+                    )
+                  : _buildArticleList(context),
+            ],
+          );
+        },
       ),
     );
   }
@@ -49,13 +61,17 @@ class TrainingContent extends StatelessWidget {
 
   Widget _buildArticleList(BuildContext context) {
     final theme = Theme.of(context).textTheme;
-    return ListView.builder(
+    return Consumer<TrainingNotifier>(builder: (context, trainingNotifier, _) {
+      final data = trainingNotifier.trainings;
+      return ListView.builder(
         shrinkWrap: true,
-        itemCount: 6,
+        itemCount: data.length,
         itemBuilder: (context, index) {
           return AppCard(
             onTap: () {
-              context.router.push(TrainingRoute(title: 'Training Detail'));
+              context.router.push(
+                TrainingRoute(index: data[index].index),
+              );
             },
             child: Column(
               children: [
@@ -72,7 +88,7 @@ class TrainingContent extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  'Mario Smith',
+                  data[index].name,
                   style: theme.headlineMedium!.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -80,6 +96,8 @@ class TrainingContent extends StatelessWidget {
               ],
             ),
           );
-        });
+        },
+      );
+    });
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sport_coach/navigation/app_router.gr.dart';
 import 'package:sport_coach/providers/athlete_notifier.dart';
+import 'package:sport_coach/providers/training_notifier.dart';
 import 'package:sport_coach/screens/home/athletes/athletes_content.dart';
 import 'package:sport_coach/screens/home/calendar/calendar_content.dart';
 import 'package:sport_coach/screens/home/rating/rating_content.dart';
@@ -19,10 +20,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int selectedIndex = 0;
+  int selectedIndex = 1;
 
   final PageController _pageController = PageController(
-    initialPage: 0,
+    initialPage: 1,
   );
 
   @override
@@ -79,6 +80,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         AthleteEditRoute(
                           title: 'New Athlete',
                           index: athlete.athleteIndex,
+                        ),
+                      );
+                    }
+                    if (selectedIndex == 1) {
+                      final training = context.read<TrainingNotifier>();
+                      context.router.push(
+                        NewTrainingProgram(
+                          title: 'New Personal Program',
+                          index: training.trainingIndex,
                         ),
                       );
                     }

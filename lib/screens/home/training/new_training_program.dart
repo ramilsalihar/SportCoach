@@ -1,27 +1,120 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:sport_coach/widgets/forms/app_text_form_field.dart';
+import 'package:provider/provider.dart';
+import 'package:sport_coach/models/training_model.dart';
+import 'package:sport_coach/providers/training_notifier.dart';
+import 'package:sport_coach/screens/home/training/training_form.dart';
 import 'package:sport_coach/widgets/layout/custom_app_bar.dart';
 
 @RoutePage()
-class NewTrainingProgram extends StatelessWidget {
-  const NewTrainingProgram({super.key});
+class NewTrainingProgram extends StatefulWidget {
+  const NewTrainingProgram({
+    super.key,
+    this.title,
+    this.index,
+    this.isEdit = false,
+  });
+
+  final String? title;
+  final int? index;
+  final bool isEdit;
+
+  @override
+  State<NewTrainingProgram> createState() => _NewTrainingProgramState();
+}
+
+class _NewTrainingProgramState extends State<NewTrainingProgram> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
+  final repetitionsController = TextEditingController();
+  final approachesController = TextEditingController();
+  final exNameController = TextEditingController();
+  final exRepetitionController = TextEditingController();
+  final exApproachesController = TextEditingController();
+  final exWeightController = TextEditingController();
+
+  TrainingModel? training = TrainingModel.empty();
+
+  @override
+  void initState() {
+    super.initState();
+    final trainingNotifier = context.read<TrainingNotifier>();
+    if (widget.isEdit && widget.index != null) {
+      training =
+          trainingNotifier.findByIndex(widget.index!) ?? TrainingModel.empty();
+      if (training != null) {
+        nameController.text = training!.name;
+        repetitionsController.text = training!.repetition;
+        approachesController.text = training!.approaches;
+        exNameController.text = training!.exName;
+        exRepetitionController.text = training!.exRepetitions;
+        exApproachesController.text = training!.exApproaches;
+        exWeightController.text = training!.exWeight;
+      }
+    }
+  }
+
+  void _saveTraining() async {
+    if (_formKey.currentState!.validate()) {
+      final index = widget.isEdit ? widget.index : (widget.index! + 1);
+      final training = TrainingModel(
+        index: index!,
+        imagePath: '',
+        name: nameController.text,
+        repetition: repetitionsController.text,
+        approaches: approachesController.text,
+        exName: exNameController.text,
+        exRepetitions: exRepetitionController.text,
+        exApproaches: exApproachesController.text,
+        exWeight: exWeightController.text,
+      );
+
+      final trainingNotifier = context.read<TrainingNotifier>();
+
+      if (widget.isEdit) {
+        await trainingNotifier.editTraining(widget.index!, training);
+      } else {
+        await trainingNotifier.addTraining(training);
+        await trainingNotifier.setTrainingIndex(widget.index! + 1);
+      }
+
+      Navigator.of(context).pop();
+    }
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    repetitionsController.dispose();
+    approachesController.dispose();
+    exNameController.dispose();
+    exRepetitionController.dispose();
+    exApproachesController.dispose();
+    exWeightController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: theme.primaryColor,
       appBar: CustomAppBar(
-        title: 'New Personal Program',
+        title: widget.title ??
+            (training == null ? 'New Personal Program' : 'Edit Program'),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: _formKey.currentState?.validate() ?? false
+                ? _saveTraining
+                : null,
             child: Text(
-              'Add',
+              'Save',
               style: theme.textTheme.headlineMedium!.copyWith(
-                color: Colors.blue,
+                color: _formKey.currentState?.validate() ?? false
+                    ? Colors.blue
+                    : Colors.blue.withOpacity(0.5),
               ),
             ),
           ),
@@ -56,81 +149,21 @@ class NewTrainingProgram extends StatelessWidget {
                 ),
               ),
             ),
-            _TrainingForm(context),
+            Form(
+              key: _formKey,
+              child: TrainingForm(
+                nameController: nameController,
+                repetitionsController: repetitionsController,
+                approachesController: approachesController,
+                exNameController: exNameController,
+                exRepetitionController: exRepetitionController,
+                exApproachesController: exApproachesController,
+                exWeightController: exWeightController,
+              ),
+            )
           ],
         ),
       ),
     );
   }
-}
-
-Widget _TrainingForm(BuildContext context) {
-  final nameController = TextEditingController();
-  final ageController = TextEditingController();
-  final weightController = TextEditingController();
-  final heightController = TextEditingController();
-  final classesController = TextEditingController();
-  final durationController = TextEditingController();
-  return ListView(
-    shrinkWrap: true,
-    children: [
-      const SizedBox(height: 10),
-      AppTextFormField(
-        hintText: 'Enter',
-        title: 'Name',
-        controller: nameController,
-      ),
-      const SizedBox(height: 10),
-      Row(
-        children: [
-          Expanded(
-            child: AppTextFormField(
-              hintText: 'Enter',
-              title: 'Repetitions',
-              controller: ageController,
-            ),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          Expanded(
-            child: AppTextFormField(
-              hintText: 'Enter',
-              title: 'Approaches',
-              controller: ageController,
-            ),
-          ),
-        ],
-      ),
-      const SizedBox(height: 10),
-      Text(
-        'Exercises',
-        style: Theme.of(context).textTheme.displayMedium,
-      ),
-      const SizedBox(height: 10),
-      AppTextFormField(
-        hintText: 'Enter',
-        title: 'Name',
-        controller: ageController,
-      ),
-      const SizedBox(height: 10),
-      AppTextFormField(
-        hintText: 'Enter',
-        title: 'Repetitions',
-        controller: weightController,
-      ),
-      const SizedBox(height: 10),
-      AppTextFormField(
-        hintText: 'Enter',
-        title: 'Approaches',
-        controller: heightController,
-      ),
-      const SizedBox(height: 10),
-      AppTextFormField(
-        hintText: 'Enter',
-        title: 'Weight',
-        controller: classesController,
-      ),
-    ],
-  );
 }

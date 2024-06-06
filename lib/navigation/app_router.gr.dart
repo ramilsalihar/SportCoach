@@ -89,9 +89,16 @@ abstract class $AppRouter extends _i12.RootStackRouter {
       );
     },
     NewTrainingProgram.name: (routeData) {
+      final args = routeData.argsAs<NewTrainingProgramArgs>(
+          orElse: () => const NewTrainingProgramArgs());
       return _i12.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i9.NewTrainingProgram(),
+        child: _i9.NewTrainingProgram(
+          key: args.key,
+          title: args.title,
+          index: args.index,
+          isEdit: args.isEdit,
+        ),
       );
     },
     SplashRoute.name: (routeData) {
@@ -106,7 +113,7 @@ abstract class $AppRouter extends _i12.RootStackRouter {
         routeData: routeData,
         child: _i11.TrainingScreen(
           key: args.key,
-          title: args.title,
+          index: args.index,
         ),
       );
     },
@@ -285,16 +292,50 @@ class NewRating extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.NewTrainingProgram]
-class NewTrainingProgram extends _i12.PageRouteInfo<void> {
-  const NewTrainingProgram({List<_i12.PageRouteInfo>? children})
-      : super(
+class NewTrainingProgram extends _i12.PageRouteInfo<NewTrainingProgramArgs> {
+  NewTrainingProgram({
+    _i13.Key? key,
+    String? title,
+    int? index,
+    bool isEdit = false,
+    List<_i12.PageRouteInfo>? children,
+  }) : super(
           NewTrainingProgram.name,
+          args: NewTrainingProgramArgs(
+            key: key,
+            title: title,
+            index: index,
+            isEdit: isEdit,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'NewTrainingProgram';
 
-  static const _i12.PageInfo<void> page = _i12.PageInfo<void>(name);
+  static const _i12.PageInfo<NewTrainingProgramArgs> page =
+      _i12.PageInfo<NewTrainingProgramArgs>(name);
+}
+
+class NewTrainingProgramArgs {
+  const NewTrainingProgramArgs({
+    this.key,
+    this.title,
+    this.index,
+    this.isEdit = false,
+  });
+
+  final _i13.Key? key;
+
+  final String? title;
+
+  final int? index;
+
+  final bool isEdit;
+
+  @override
+  String toString() {
+    return 'NewTrainingProgramArgs{key: $key, title: $title, index: $index, isEdit: $isEdit}';
+  }
 }
 
 /// generated route for
@@ -316,13 +357,13 @@ class SplashRoute extends _i12.PageRouteInfo<void> {
 class TrainingRoute extends _i12.PageRouteInfo<TrainingRouteArgs> {
   TrainingRoute({
     _i13.Key? key,
-    required String title,
+    required int index,
     List<_i12.PageRouteInfo>? children,
   }) : super(
           TrainingRoute.name,
           args: TrainingRouteArgs(
             key: key,
-            title: title,
+            index: index,
           ),
           initialChildren: children,
         );
@@ -336,15 +377,15 @@ class TrainingRoute extends _i12.PageRouteInfo<TrainingRouteArgs> {
 class TrainingRouteArgs {
   const TrainingRouteArgs({
     this.key,
-    required this.title,
+    required this.index,
   });
 
   final _i13.Key? key;
 
-  final String title;
+  final int index;
 
   @override
   String toString() {
-    return 'TrainingRouteArgs{key: $key, title: $title}';
+    return 'TrainingRouteArgs{key: $key, index: $index}';
   }
 }

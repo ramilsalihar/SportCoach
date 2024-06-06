@@ -1,88 +1,99 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sport_coach/navigation/app_router.gr.dart';
+import 'package:sport_coach/providers/training_notifier.dart';
 import 'package:sport_coach/widgets/cards/exercise_card.dart';
 import 'package:sport_coach/widgets/cards/number_card.dart';
+import 'package:sport_coach/widgets/layout/custom_app_bar.dart';
 
 @RoutePage()
 class TrainingScreen extends StatelessWidget {
-  const TrainingScreen({super.key, required this.title});
+  const TrainingScreen({super.key, required this.index});
 
-  final String title;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: theme.primaryColor,
-        appBar: AppBar(
-          toolbarHeight: 80,
-          backgroundColor: Colors.transparent,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.blue,
-            ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          title: Text(title, style: theme.textTheme.displaySmall),
-          centerTitle: true,
-          actions: [
-            IconButton(
-                icon: const Icon(
-                  Icons.edit,
-                  color: Colors.blue,
+      child: Consumer<TrainingNotifier>(
+        builder: (context, trainingNotifier, _) {
+          final training = trainingNotifier.findByIndex(index);
+
+          if (training == null) {
+            return const SizedBox();
+          }
+
+          return Scaffold(
+            backgroundColor: theme.primaryColor,
+            appBar: CustomAppBar(
+              title: training!.name,
+              actions: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.edit,
+                    color: Colors.blue,
+                  ),
+                  onPressed: () {
+                    context.router.push(NewTrainingProgram(
+                      isEdit: true,
+                      index: training.index,
+                      title: training.name,
+                    ));
+                  },
                 ),
-                onPressed: () {
-                  context.router.push(
-                    AthleteEditRoute(title: 'Edit Athlete'),
-                  );
-                }),
-            IconButton(
-              icon: const Icon(
-                Icons.delete,
-                color: Colors.blue,
-              ),
-              onPressed: () {},
+                IconButton(
+                  icon: const Icon(
+                    Icons.delete,
+                    color: Colors.blue,
+                  ),
+                  onPressed: () {
+                    context.read<TrainingNotifier>().deleteTraining(index);
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.only(
-            top: 30,
-            left: 15,
-            right: 15,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 15),
-              const Row(
+            body: Padding(
+              padding: const EdgeInsets.only(
+                top: 30,
+                left: 15,
+                right: 15,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  NumberCard(value: '15', text: 'Repetitions'),
-                  SizedBox(width: 15),
-                  NumberCard(value: '3', text: 'Approaches'),
+                  const SizedBox(height: 15),
+                  Row(
+                    children: [
+                      NumberCard(
+                          value: training.repetition, text: 'Repetitions'),
+                      const SizedBox(width: 15),
+                      NumberCard(
+                          value: training.approaches, text: 'Approaches'),
+                    ],
+                  ),
+                  const SizedBox(height: 15),
+                  Text(
+                    'Exercises',
+                    style: theme.textTheme.displayMedium,
+                  ),
+                  const SizedBox(height: 15),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: 1,
+                    itemBuilder: (context, index) {
+                      return ExerciseCard(
+                        index: training.index,
+                      );
+                    },
+                  ),
                 ],
               ),
-              const SizedBox(height: 15),
-              Text(
-                'Exercises',
-                style: theme.textTheme.displayMedium,
-              ),
-              const SizedBox(height: 15),
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: 1,
-                itemBuilder: (context, index) {
-                  return const ExerciseCard();
-                },
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

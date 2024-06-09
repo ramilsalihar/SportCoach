@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:sport_coach/navigation/app_router.gr.dart';
 import 'package:sport_coach/providers/athlete_notifier.dart';
 import 'package:sport_coach/providers/event_notifier.dart';
+import 'package:sport_coach/providers/rating_notifier.dart';
 import 'package:sport_coach/providers/training_notifier.dart';
 import 'package:sport_coach/screens/home/athletes/athletes_content.dart';
 import 'package:sport_coach/screens/home/calendar/calendar_content.dart';
@@ -21,10 +22,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int selectedIndex = 2;
+  int selectedIndex = 3;
 
   final PageController _pageController = PageController(
-    initialPage: 2,
+    initialPage: 3,
   );
 
   @override
@@ -100,7 +101,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         title: 'New Event',
                       ));
                     }
-                    if (selectedIndex == 3) {}
+                    if (selectedIndex == 3) {
+                      final rating = context.read<RatingNotifier>();
+                      context.router.push(
+                        NewRating(
+                          index: rating.ratingIndex,
+                        ),
+                      );
+                    }
                   },
                 ),
               )

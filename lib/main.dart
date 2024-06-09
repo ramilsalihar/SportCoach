@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:sport_coach/navigation/app_router.dart';
 import 'package:sport_coach/providers/athlete_notifier.dart';
 import 'package:sport_coach/providers/event_notifier.dart';
+import 'package:sport_coach/providers/rating_notifier.dart';
 import 'package:sport_coach/providers/training_notifier.dart';
 import 'package:sport_coach/theme/app_theme.dart';
 
@@ -18,6 +19,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (_) => TrainingNotifier(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => RatingNotifier(),
         ),
       ],
       child: const SportCoach(),

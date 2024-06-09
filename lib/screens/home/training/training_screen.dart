@@ -28,7 +28,7 @@ class TrainingScreen extends StatelessWidget {
           return Scaffold(
             backgroundColor: theme.primaryColor,
             appBar: CustomAppBar(
-              title: training!.name,
+              title: training.name,
               actions: [
                 IconButton(
                   icon: const Icon(

@@ -43,9 +43,15 @@ abstract class $AppRouter extends _i12.RootStackRouter {
       );
     },
     AthleteRating.name: (routeData) {
+      final args = routeData.argsAs<AthleteRatingArgs>();
       return _i12.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.AthleteRating(),
+        child: _i2.AthleteRating(
+          key: args.key,
+          index: args.index,
+          title: args.title,
+          isEdit: args.isEdit,
+        ),
       );
     },
     AthleteRoute.name: (routeData) {
@@ -94,9 +100,13 @@ abstract class $AppRouter extends _i12.RootStackRouter {
       );
     },
     NewRating.name: (routeData) {
+      final args = routeData.argsAs<NewRatingArgs>();
       return _i12.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i8.NewRating(),
+        child: _i8.NewRating(
+          key: args.key,
+          index: args.index,
+        ),
       );
     },
     NewTrainingProgram.name: (routeData) {
@@ -181,16 +191,50 @@ class AthleteEditRouteArgs {
 
 /// generated route for
 /// [_i2.AthleteRating]
-class AthleteRating extends _i12.PageRouteInfo<void> {
-  const AthleteRating({List<_i12.PageRouteInfo>? children})
-      : super(
+class AthleteRating extends _i12.PageRouteInfo<AthleteRatingArgs> {
+  AthleteRating({
+    _i13.Key? key,
+    required int index,
+    required String title,
+    bool isEdit = false,
+    List<_i12.PageRouteInfo>? children,
+  }) : super(
           AthleteRating.name,
+          args: AthleteRatingArgs(
+            key: key,
+            index: index,
+            title: title,
+            isEdit: isEdit,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'AthleteRating';
 
-  static const _i12.PageInfo<void> page = _i12.PageInfo<void>(name);
+  static const _i12.PageInfo<AthleteRatingArgs> page =
+      _i12.PageInfo<AthleteRatingArgs>(name);
+}
+
+class AthleteRatingArgs {
+  const AthleteRatingArgs({
+    this.key,
+    required this.index,
+    required this.title,
+    this.isEdit = false,
+  });
+
+  final _i13.Key? key;
+
+  final int index;
+
+  final String title;
+
+  final bool isEdit;
+
+  @override
+  String toString() {
+    return 'AthleteRatingArgs{key: $key, index: $index, title: $title, isEdit: $isEdit}';
+  }
 }
 
 /// generated route for
@@ -347,16 +391,40 @@ class IntroRoutes extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.NewRating]
-class NewRating extends _i12.PageRouteInfo<void> {
-  const NewRating({List<_i12.PageRouteInfo>? children})
-      : super(
+class NewRating extends _i12.PageRouteInfo<NewRatingArgs> {
+  NewRating({
+    _i13.Key? key,
+    required int index,
+    List<_i12.PageRouteInfo>? children,
+  }) : super(
           NewRating.name,
+          args: NewRatingArgs(
+            key: key,
+            index: index,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'NewRating';
 
-  static const _i12.PageInfo<void> page = _i12.PageInfo<void>(name);
+  static const _i12.PageInfo<NewRatingArgs> page =
+      _i12.PageInfo<NewRatingArgs>(name);
+}
+
+class NewRatingArgs {
+  const NewRatingArgs({
+    this.key,
+    required this.index,
+  });
+
+  final _i13.Key? key;
+
+  final int index;
+
+  @override
+  String toString() {
+    return 'NewRatingArgs{key: $key, index: $index}';
+  }
 }
 
 /// generated route for

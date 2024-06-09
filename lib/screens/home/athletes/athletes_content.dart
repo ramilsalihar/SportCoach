@@ -32,7 +32,7 @@ class AthletesContent extends StatelessWidget {
                       title: 'Players',
                       message: 'Your athletes will be\nrepresented here',
                       buttonText: 'Click to add new players',
-                      onPressed: () async {
+                      onPressed: () {
                         final athlete = context.read<AthleteNotifier>();
                         context.router.push(
                           AthleteEditRoute(

@@ -22,10 +22,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int selectedIndex = 3;
+  int selectedIndex = 0;
 
   final PageController _pageController = PageController(
-    initialPage: 3,
+    initialPage: 0,
   );
 
   @override

@@ -1,11 +1,14 @@
+import kotlin.io.NoSuchFileException
+
 plugins {
     id "com.android.application"
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
+    id "com.onesignal.androidsdk.onesignal-gradle-plugin"
 }
 
-def localProperties = new Properties()
+def localProperties = new NoSuchFileException()
 def localPropertiesFile = rootProject.file("local.properties")
 if (localPropertiesFile.exists()) {
     localPropertiesFile.withReader("UTF-8") { reader ->
@@ -53,6 +56,15 @@ android {
     }
 }
 
+
 flutter {
     source = "../.."
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
+    implementation 'com.yandex.android:mobile-metrica:5.0.0'
 }

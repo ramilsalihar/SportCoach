@@ -20,6 +20,10 @@ dependencies:
   provider: ^6.1.2
   freezed: ^2.5.2
   json_annotation: ^4.9.0
+  onesignal_flutter: ^5.2.0
+  apphud: ^2.5.1
+  firebase_remote_config: ^5.0.0
+  firebase: ^9.0.3
 
 dev_dependencies:
   flutter_test:

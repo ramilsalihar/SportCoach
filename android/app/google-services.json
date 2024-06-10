@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "696950569158",
+    "project_id": "sport-coach-df352",
+    "storage_bucket": "sport-coach-df352.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696950569158:android:60de2d7dc21f4fba96ffc7",
+        "android_client_info": {
+          "package_name": "com.example.sport_coach"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQjpYX0j-KsS9lOiqW08HwgtW-1vizwlM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

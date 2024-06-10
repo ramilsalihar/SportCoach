@@ -2,6 +2,7 @@ import 'package:apphud/apphud.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sport_coach/firebase_options.dart';
 import 'package:sport_coach/navigation/app_router.dart';
 import 'package:sport_coach/providers/athlete_notifier.dart';
 import 'package:sport_coach/providers/event_notifier.dart';
@@ -17,7 +18,9 @@ void main() async {
 
   // YMMYandexMetrica.reportEvent("did_show_main_screen");
 
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await RemoteConfigService().initialize();
 
   runApp(

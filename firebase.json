@@ -1,5 +1,1 @@
-{
-  "remoteconfig": {
-    "template": "remoteconfig.template.json"
-  }
-}
+{"remoteconfig":{"template":"remoteconfig.template.json"},"flutter":{"platforms":{"android":{"default":{"projectId":"sport-coach-df352","appId":"1:696950569158:android:60de2d7dc21f4fba96ffc7","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"sport-coach-df352","configurations":{"android":"1:696950569158:android:60de2d7dc21f4fba96ffc7","ios":"1:696950569158:ios:7ab39c7291a672be96ffc7","macos":"1:696950569158:ios:7ab39c7291a672be96ffc7","web":"1:696950569158:web:4eb51a50240e7b6296ffc7","windows":"1:696950569158:web:5486641ba06b596996ffc7"}}}}}}

@@ -7,6 +7,7 @@ import 'package:sport_coach/providers/athlete_notifier.dart';
 import 'package:sport_coach/providers/event_notifier.dart';
 import 'package:sport_coach/providers/rating_notifier.dart';
 import 'package:sport_coach/providers/training_notifier.dart';
+import 'package:sport_coach/services/remote_config_service.dart';
 import 'package:sport_coach/theme/app_theme.dart';
 
 void main() async {
@@ -17,6 +18,7 @@ void main() async {
   // YMMYandexMetrica.reportEvent("did_show_main_screen");
 
   await Firebase.initializeApp();
+  await RemoteConfigService().initialize();
 
   runApp(
     MultiProvider(

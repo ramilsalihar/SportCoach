@@ -24,6 +24,7 @@ dependencies:
   apphud: ^2.5.1
   firebase_remote_config: ^5.0.0
   firebase: ^9.0.3
+  webview_flutter: ^4.8.0
 
 dev_dependencies:
   flutter_test:
